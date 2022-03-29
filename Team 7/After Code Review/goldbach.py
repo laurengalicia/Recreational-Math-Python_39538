@@ -15,14 +15,25 @@ Parameters
     Returns
     -------
     i, n-1 : two prime integers, if found
+
+Errors corrected after code review:
+
+1. Check that user input is positive
+2. Add special case for 2, since it is a positive even integer that cannot be broken down into the sum of two primes
+3. is_prime() doesn't need to divide n by all integers up to n-1 to check if n is prime -- only up to n//2+1
+4. No 'else' needed on last line
+
 '''
 
 def goldbach(n):
-    if not n%2 == 0:
-        raise Exception('That\'s not an even number!')
-
+    
+    if n == 2:
+        return '2 is a special case: (1,1) if you consider 1 to be prime, otherwise 2 is an exception.'
+    if not (n%2 == 0 and n>0):
+        return Exception('That\'s not a positive even number!')
+    
     def is_prime(n):
-        for i in range(2,n):
+        for i in range(2,n//2+1):
             if n%i == 0:
                 return False
         return True
@@ -31,6 +42,6 @@ def goldbach(n):
         if is_prime(i):
             if is_prime(n-i):
                 return (i,n-i)
-    else: return 'No pair of primes found!'
+    return 'No pair of primes found!' 
 
 print(goldbach(72728))
