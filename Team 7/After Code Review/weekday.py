@@ -24,6 +24,13 @@ def weekday(date):
     -------
     weekday : STRING
         The day of the week the date lands on.
+        
+    Errors
+    ----------
+    year, month, day = [int(n) for n in [year, day, month]]
+    - inconsistent order of variables
+    leap = -1 if month < 2 and Gregorian and year % 4 == 0 and year % 100 != 0 or year % 400 == 0 else 0
+    - lack of grouping affects value's accuracy
     '''
     year, month, day = date.split('/')
     week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
